@@ -101,7 +101,7 @@ def add_exif_watermark(input_image_path, output_image_path, force_add_watermark,
     # 创建字体（保持逻辑不变）
     brand_font = ImageFont.truetype(config['font']['brand_font_path'], config['font']['normal_size'])
     model_font = ImageFont.truetype(config['font']['model_font_path'], config['font']['normal_size'])
-    lens_font = ImageFont.truetype(config['font']['lens_font_path'], config['font']['small_size'])
+    lens_font = ImageFont.truetype(config['font']['lens_font_path'], config['font']['normal_lens_ISOinfo_size'])
 
     # 绘制品牌水印文本
     text_y_brand = image.shape[0] + border_width + 10
@@ -111,10 +111,10 @@ def add_exif_watermark(input_image_path, output_image_path, force_add_watermark,
     text_y_model = text_y_brand + (config['font']['normal_size'] + 10)
     draw.text((315, text_y_model), image_model, font=model_font, fill=(0, 0, 0))
 
-    # 计算镜头型号的信息
+    # 计算拍摄信息
     lens_text_y = text_y_model + 20
     lens_text_x = new_image.shape[1] - 315
-    lens_info_y = text_y_model - 35
+    lens_info_y = text_y_model - 50
     lens_info = f"|ISO{iso}|F{aperture}|{shutter_speed}|"  
     draw.text((lens_text_x, lens_info_y), lens_info, font=lens_font, fill=(0, 0, 0), anchor="ra")  
     draw.text((lens_text_x, lens_text_y), lens_model, font=lens_font, fill=(0, 0, 0), anchor="ra")  
