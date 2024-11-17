@@ -33,7 +33,7 @@ python exif.py
 
 ### 设置参数
 
-- `python exif.py` 这块是你的图片(必须是jpg格式).jpg 这块是你要导出文件的名称（后缀jpg格式）.jpg
+- `python exif.py 这块是你的图片(必须是jpg格式).jpg 这块是你要导出文件的名称（后缀jpg格式）.jpg`
 
 - 然后你会看到一大堆的提示，正常只需要等待就可以了。
 
