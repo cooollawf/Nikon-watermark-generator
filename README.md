@@ -46,6 +46,9 @@ python exif.py
 - `python exif.py --all`
 - 以调试模式运行以查看 EXIF 信息：
 - `python exif.py input_image.jpg output_image.png --debug`
+- 不使用GPU加速：
+- `python exif.py input_image.jpg output_image.png --nogpu`
+
 
 ### GPU BOOST（only nvdia gpu）（可选）
 
@@ -75,6 +78,7 @@ python exif.py
    ```python
    import torch
    print(torch.__version__)  # 查看安装的 PyTorch 版本
+
 ### 特别感谢
 - Python 库 [Pillow](https://github.com/python-pillow/Pillow) 提供了图像处理的能力。
 - bangbang93的[OpenBMCLAPI](https://github.com/bangbang93/OpenBMCLAPI)项目提供了README模板。(俗称抄的)
