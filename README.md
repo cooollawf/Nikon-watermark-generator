@@ -46,6 +46,35 @@ python exif.py
 - `python exif.py --all`
 - 以调试模式运行以查看 EXIF 信息：
 - `python exif.py input_image.jpg output_image.png --debug`
+
+### GPU BOOST（only nvdia gpu）（可选）
+
+
+根据您的操作系统和 CUDA 版本选择合适的命令进行安装。
+
+1. **访问 [PyTorch 官网](https://pytorch.org/)**：根据您的系统、语言和包管理工具获取相应的安装命令。
+
+2. **基本安装命令**：
+   - 对于 **CPU** 版本（适用于所有平台）：
+     ```bash
+     pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu
+     ```
+
+   - 对于 **带 GPU 支持的安装**（适用于使用 NVIDIA GPU 的用户）：
+     - 如果您的机器上已安装 CUDA 11.3：
+     ```bash
+     pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
+     ```
+     - 如果您的机器上已安装 CUDA 10.2：
+     ```bash
+     pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu102
+     ```
+
+3. **验证安装**：
+   在 Python 环境中运行以下命令以验证 PyTorch 是否成功安装：
+   ```python
+   import torch
+   print(torch.__version__)  # 查看安装的 PyTorch 版本
 ### 特别感谢
 - Python 库 [Pillow](https://github.com/python-pillow/Pillow) 提供了图像处理的能力。
 - bangbang93的[OpenBMCLAPI](https://github.com/bangbang93/OpenBMCLAPI)项目提供了README模板。(俗称抄的)
