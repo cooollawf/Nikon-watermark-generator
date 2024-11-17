@@ -1,0 +1,20 @@
+font:
+  normal_size: 100 # 正常字体大小
+  normal_lens_ISOinfo_size: 70 # 正常镜头和ISO信息字体大小
+  small_size: 50      # 小字体大小（小字体模式已经被弃用）
+  brand_font_path: 'fonts/MiSans-Bold.ttf'  # 品牌字体文件路径（默认MiSans-Bold，希望小米不要打我）
+  model_font_path: 'fonts/MiSans-Regular.ttf'  # 型号字体文件路径（默认MiSans-Regular，希望小米不要打我）
+  lens_font_path: 'fonts/MiSans-Regular.ttf'    # 镜头型号字体文件路径（默认MiSans-Regular，希望小米不要打我）
+lens_small_size: 120   # 镜头型号字体小字体大小
+
+image:
+  box_height: 200     # 图片框的高度，适应佳能 Logo 大小就应该设置为150
+  logo_size:          # 尼康普通Logo的大小（小图标，正常图标的0.5倍）
+    width: 364
+    height: 200
+  canon_logo_size:    # 佳能Logo的大小
+    width: 182
+    height: 100
+  border_width: 100    # 白框的宽度
+
+width_threshold: 1800  # 图片宽度阈值（触发小字体模式）
