@@ -74,9 +74,13 @@ def add_exif_watermark(input_image_path, output_image_path, force_add_watermark,
     aperture = str(tags.get('EXIF FNumber', 'N/A'))
     shutter_speed = str(tags.get('EXIF ExposureTime', 'N/A'))
     
+    # 打印EXIF镜头型号
+    print(f"从EXIF获取的镜头型号: {lens_model}")  # 调试输出
+
     # 当 lens_model 为 'N/A' 且 lens_model_param 不为空，使用 lens_model_param
     if lens_model == 'N/A' and lens_model_param:
         lens_model = lens_model_param
+        print(f"使用传入的镜头型号: {lens_model}")  # 调试输出
 
     # 如果 lens_model 还是 'N/A'，提示用户输入
     if lens_model == 'N/A':
@@ -101,7 +105,7 @@ def add_exif_watermark(input_image_path, output_image_path, force_add_watermark,
     # 创建字体（保持逻辑不变）
     brand_font = ImageFont.truetype(config['font']['brand_font_path'], config['font']['normal_size'])
     model_font = ImageFont.truetype(config['font']['model_font_path'], config['font']['normal_size'])
-    lens_font = ImageFont.truetype(config['font']['lens_font_path'], config['font']['normal_lens_ISOinfo_size'])
+    lens_font = ImageFont.truetype(config['font']['lens_font_path'], config['font']['normal_size'])
 
     # 绘制品牌水印文本
     text_y_brand = image.shape[0] + border_width + 10
@@ -144,7 +148,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Add EXIF watermark to an image.')
     parser.add_argument('input_image', nargs='?', help='Input image path (optional if using --all)')
     parser.add_argument('output_image', nargs='?', help='Output image path (optional if using --all)')
-    parser.add_argument('lens_model', nargs='?', default='', help='Lens model parameter (optional)')
+    parser.add_argument('--lens_model', nargs='?', default='', help='Lens model parameter (optional)')
     parser.add_argument('--nosmalladd', action='store_true', help='Force add watermark even if the image is small')
     parser.add_argument('--all', action='store_true', help='Process all selected images')
     parser.add_argument('--debug', action='store_true', help='Export all EXIF information to console')
@@ -161,7 +165,7 @@ if __name__ == "__main__":
         
         with ThreadPoolExecutor() as executor:
             futures = [
-                executor.submit(process_image, input_image, os.path.join('out', os.path.basename(input_image)), args.nosmalladd, args.debug, config, use_gpu, args.lens_model)
+                executor.submit(process_image, input_image, os.path.join('out', os.path.basename(input_image)), args.nosmalladd, args.debug, config, use_gpu, args.lens_model or '')
                 for input_image in input_images
             ]
             # 可以在此处添加对 futures 的监视和处理
