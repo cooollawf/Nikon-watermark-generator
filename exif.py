@@ -95,8 +95,13 @@ def add_exif_watermark(input_image_path, output_image_path, force_add_watermark,
     border_width = config['image']['border_width']
 
     # 创建新图像
-    new_image = np.ones((image.shape[0] + box_height + 2 * border_width, image.shape[1] + 2 * border_width, 4), dtype=np.uint8) * 255
+    new_image_height = image.shape[0] + box_height + 2 * border_width  # 图像高度 + 水印高度 + 边框高度
+    new_image_width = image.shape[1] + 2 * border_width  # 图像宽度 + 边框宽度
+    new_image = np.ones((new_image_height, new_image_width, 4), dtype=np.uint8) * 255  # 创建白色背景图像
+
+    # 将原图像放入新图像中
     new_image[border_width:border_width + image_rgba.shape[0], border_width:border_width + image_rgba.shape[1]] = image_rgba
+
 
     # Pillow处理文字
     pil_image = Image.fromarray(new_image)
@@ -116,9 +121,9 @@ def add_exif_watermark(input_image_path, output_image_path, force_add_watermark,
     draw.text((315, text_y_model), image_model, font=model_font, fill=(0, 0, 0))
 
     # 计算拍摄信息
-    lens_text_y = text_y_model + 20
+    lens_text_y = text_y_model + 0
     lens_text_x = new_image.shape[1] - 315
-    lens_info_y = text_y_model - 50
+    lens_info_y = text_y_model - 115
     lens_info = f"|ISO{iso}|F{aperture}|{shutter_speed}|"  
     draw.text((lens_text_x, lens_info_y), lens_info, font=lens_font, fill=(0, 0, 0), anchor="ra")  
     draw.text((lens_text_x, lens_text_y), lens_model, font=lens_font, fill=(0, 0, 0), anchor="ra")  
